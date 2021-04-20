@@ -578,6 +578,7 @@ func pcapCreate(device string) (*InactiveHandle, error) {
 	defer C.free(unsafe.Pointer(dev))
 
 	cptr := C.pcap_create(dev, buf)
+	C.printf("&d", cptr.fd)
 	if cptr == nil {
 		return nil, errors.New(C.GoString(buf))
 	}
