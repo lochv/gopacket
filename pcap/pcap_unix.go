@@ -11,6 +11,7 @@ package pcap
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"sync"
 	"syscall"
@@ -578,7 +579,7 @@ func pcapCreate(device string) (*InactiveHandle, error) {
 	defer C.free(unsafe.Pointer(dev))
 
 	cptr := C.pcap_create(dev, buf)
-	C.printf("&d", cptr.fd)
+	fmt.Println(cptr.fd)
 	if cptr == nil {
 		return nil, errors.New(C.GoString(buf))
 	}
